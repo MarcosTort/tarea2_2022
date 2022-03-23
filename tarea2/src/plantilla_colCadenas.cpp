@@ -1,37 +1,64 @@
-/* 1234567 */ // sustituiir con los 7 dígitos de la cédula
+/* 5286580 */ // sustituiir con los 7 dígitos de la cédula
 
 #include "../include/colCadenas.h"
+#include "../include/cadena.h"
 
-struct _rep_colCadenas {};
 
-TColCadenas crearColCadenas() {
-  return NULL;
+
+struct _rep_colCadenas{
+  TCadena *arr;
+  nat tope;
+  nat cota;
+};
+
+
+
+TColCadenas crearColCadenas()
+{
+  TColCadenas nuevo = new _rep_colCadenas;
+  nuevo->arr = new TCadena[CANT_CADS];
+  nuevo->cota= CANT_CADS;
+  nuevo->tope = 0;
+  for (nat i = 0; i < CANT_CADS ; i++)
+  {
+    nuevo->arr[i] = crearCadena();
+  }
+  
+  return nuevo;
 }
 
+/* en siguientes tareas
 void liberarColCadenas(TColCadenas col) {
 }
-
-TCadena cadenaDeColCadenas(nat pos, TColCadenas col) {
-  return NULL;
+*/
+nat cantidadColCadenas(nat pos, TColCadenas col)
+{
+  return cantidadEnCadena(col->arr[pos]);
 }
 
-nat cantidadColCadenas(nat pos, TColCadenas col) {
-  return 0;
+bool estaEnColCadenas(nat natural, nat pos, TColCadenas col)
+{
+  
+
+
+  return estaEnCadena(natural, col->arr[pos]);
+  
 }
 
-bool estaEnColCadenas(nat natural, nat pos, TColCadenas col) {
-  return false;
+TColCadenas insertarEnColCadenas(nat natural, double real, nat pos, TColCadenas col)
+{
+  col->arr[pos] = insertarAlInicio(natural, real, col->arr[pos]);
+  return col;
 }
 
-TColCadenas insertarEnColCadenas(nat natural, double real, nat pos,
-                                 TColCadenas col) {
-  return NULL;
+TInfo infoEnColCadenas(nat natural, nat pos, TColCadenas col)
+{
+ return infoCadena(natural, col->arr[pos]);
+
 }
 
-TInfo infoEnColCadenas(nat natural, nat pos, TColCadenas col) {
-  return NULL;
-}
-
-TColCadenas removerDeColCadenas(nat natural, nat pos, TColCadenas col) {
-  return NULL;
+TColCadenas removerDeColCadenas(nat natural, nat pos, TColCadenas col)
+{
+  col->arr[pos] = removerDeCadena(natural, col->arr[pos]);
+  return col;
 }
