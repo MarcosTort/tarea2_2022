@@ -6,7 +6,8 @@
 
 
 TCadena insertarAlFinal(nat natural, double real, TCadena cad) {
-  return NULL;
+  cad = insertarAlFinal_aux(crearInfo(natural, real), cad);
+  return cad;
 }
 
 TCadena removerPrimero(TCadena cad) {

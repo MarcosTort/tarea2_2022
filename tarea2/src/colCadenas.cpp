@@ -45,6 +45,17 @@ bool estaEnColCadenas(nat natural, nat pos, TColCadenas col)
   
 }
 
+/* ++++++++++++++++++++++ NUEVA ++++++++++++++++++++ */
+
+/*
+  Devuelve la TCadena de 'col' identificada con 'pos'.
+  La TCadena resultado comparte memoria con 'col'.
+  Precondición: 0 <= pos < CANT_CADS.
+ */
+TCadena cadenaDeColCadenas(nat pos, TColCadenas col){
+  
+};
+
 TColCadenas insertarEnColCadenas(nat natural, double real, nat pos, TColCadenas col)
 {
   col->arr[pos] = insertarAlInicio(natural, real, col->arr[pos]);
