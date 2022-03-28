@@ -29,8 +29,7 @@ TColCadenas crearColCadenas()
   return nuevo;
 }
 
-void liberarColCadenas(TColCadenas col) {
-}
+
 nat cantidadColCadenas(nat pos, TColCadenas col)
 {
   return cantidadEnCadena(col->arr[pos]);
