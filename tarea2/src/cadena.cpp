@@ -28,6 +28,9 @@ TCadena crearCadena()
 void liberarCadena(TCadena cad) {
 }
 
+TInfo primeroEnCadena(TCadena cad){return NULL;};
+
+TCadena cadenaSiguiente(TCadena cad){return NULL;};
 
 nat cantidadEnCadena(TCadena cad)
 {

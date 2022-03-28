@@ -11,7 +11,9 @@ struct _rep_colCadenas{
   nat cota;
 };
 
+TCadena cadenaDeColCadenas(nat pos, TColCadenas col){return NULL;};
 
+void liberarColCadenas(TColCadenas col){};
 
 TColCadenas crearColCadenas()
 {
@@ -27,10 +29,8 @@ TColCadenas crearColCadenas()
   return nuevo;
 }
 
-/* en siguientes tareas
 void liberarColCadenas(TColCadenas col) {
 }
-*/
 nat cantidadColCadenas(nat pos, TColCadenas col)
 {
   return cantidadEnCadena(col->arr[pos]);
