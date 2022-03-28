@@ -14,11 +14,14 @@ struct _rep_cadena
 {
   TInfo dato;
   _rep_cadena *sig;
+  _rep_cadena *primero, *ultimo;
 };
 
 TCadena crearCadena()
 {
-  return NULL;
+  TCadena res = new _rep_cadena;
+  res->primero = res->ultimo = NULL;
+  return res;
 }
 
 /* en siguientes tareas
@@ -36,7 +39,7 @@ nat cantidadEnCadena(TCadena cad)
   else
   {
     count = 1;
-    while (cad->sig != NULL)
+    while (cad->sig != cad->primero)
     {
       count++;
       cad = cad->sig;
@@ -55,7 +58,7 @@ bool estaEnCadena(nat natural, TCadena cad)
   {
     while ((cad != NULL) && (natInfo(cad->dato) != natural))
     {
-      if (cad->sig != NULL)
+      if (cad->sig != cad->primero)
       {
         cad = cad->sig;
       }
@@ -81,7 +84,11 @@ TCadena insertarAlInicio(nat natural, double real, TCadena cad)
   TInfo dato = crearInfo(natural, real);
   q->dato = dato;
   q->sig = cad;
+  if(cad == NULL){
+    cad->ultimo = q;
+  }
   cad = q;
+  cad->primero = q;
   return cad;
 }
 
@@ -105,7 +112,7 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
 {
   // si tiene solo un elemento, borro info y cad
-  if (cad->sig == NULL)
+  if (cad->sig == cad->primero)
   {
     liberarInfo(cad->dato);
     delete cad;
@@ -140,10 +147,10 @@ TCadena removerDeCadena(nat natural, TCadena cad)
       // q apunta a cad
       TCadena q = cadd;
 
-      // asigno aux a nul si el elemento a remover es el ultimo
-      if (q->sig == NULL)
+      // asigno aux al primero de cad si el elemento a remover es el ultimo
+      if (q->sig == cadd->ultimo)
       {
-        aux->sig = NULL;
+        aux->sig = cadd->primero;
       }
 
       // asigno aux al siguiente elemento
@@ -160,7 +167,11 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
 void imprimirCadena(TCadena cad)
 {
-  while (cad != NULL)
+  char *dat = infoATexto(cad->dato);
+  printf("%s", dat);
+  delete[] dat;
+  cad = cad->sig;
+  while (cad != cad->primero)
   {
     char *dat = infoATexto(cad->dato);
     printf("%s", dat);
