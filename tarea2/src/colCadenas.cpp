@@ -11,9 +11,22 @@ struct _rep_colCadenas{
   nat cota;
 };
 
-TCadena cadenaDeColCadenas(nat pos, TColCadenas col){return NULL;};
+TCadena cadenaDeColCadenas(nat pos, TColCadenas col){
 
-void liberarColCadenas(TColCadenas col){};
+  
+  return col->arr[pos];
+
+};
+
+void liberarColCadenas(TColCadenas col){
+
+  for (int i = 0; i < CANT_CADS; i++)
+  {
+      liberarCadena(col->arr[i]);
+  }
+  delete [] col;
+
+};
 
 TColCadenas crearColCadenas()
 {
