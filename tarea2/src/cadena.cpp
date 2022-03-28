@@ -24,10 +24,10 @@ TCadena crearCadena()
   return res;
 }
 
-/* en siguientes tareas
+
 void liberarCadena(TCadena cad) {
 }
-*/
+
 
 nat cantidadEnCadena(TCadena cad)
 {
