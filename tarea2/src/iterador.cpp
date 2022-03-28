@@ -1,4 +1,4 @@
-/* 1234567 */ // sustituiir con los 7 dígitos de la cédula
+/* 5286580 */ // sustituiir con los 7 dígitos de la cédula
 
 #include "../include/iterador.h"
 

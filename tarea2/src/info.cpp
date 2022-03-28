@@ -1,4 +1,4 @@
-/* 1234567 */
+/* 5286580 */
 /*
   Módulo de implementación de `TInfo'.
 
