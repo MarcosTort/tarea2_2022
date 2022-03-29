@@ -3,14 +3,21 @@
 #include "../include/aplicaciones.h"
 #include "../include/cadena.h"
 #include "../include/iterador.h"
-
+#include "cadena.cpp"
 
 TCadena insertarAlFinal(nat natural, double real, TCadena cad) {
-  return NULL;
+
+    cad = insertarAlInicio(natural, real, cad);
+    cad = cadenaSiguiente(cad);
+    return cad;
+
 }
 
 TCadena removerPrimero(TCadena cad) {
-  return NULL;}
+
+  cad = removerDeCadena(natInfo(primeroEnCadena(cad)), cad);
+  return cad;
+  }
 
 
 TCadena copiaCadena(TCadena cad) {

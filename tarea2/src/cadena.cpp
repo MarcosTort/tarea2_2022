@@ -43,14 +43,24 @@ TInfo primeroEnCadena(TCadena cad)
 {
   return cad->inicio->dato;
 };
+TCadena inicioCadena(TCadena cad){
+  return cad->inicio;
+}
 
+TCadena finalCadena(TCadena cad){
+  return cad->final;
+}
 TCadena cadenaSiguiente(TCadena cad)
 {
   if(cad == NULL || cad->inicio == cad->final){
     return cad;
   }
   else{
+    TCadena fin = cad->final->sig;
+    TCadena inicio = cad->inicio->sig;
     TCadena resultado = cad->sig;
+    resultado->inicio = inicio;
+    resultado->final = fin;
   }
 };
 
@@ -147,13 +157,14 @@ TCadena removerDeCadena(nat natural, TCadena cad)
   else
   // si tiene mas de un elemento, busco
   {
-    TCadena cadd = cad;
 
     // pregunto si el buscado está en el inicio
-    if (natInfo(cadd->dato) == natural)
+    if (natInfo(cad->inicio->dato) == natural)
     {
-      TCadena newStart = cadd->sig;
-      TCadena aux = cadd;
+      TCadena newStart = cad->sig;
+      cad->inicio = newStart;
+      cad->final->sig = newStart;
+      TCadena aux = cad;
       liberarInfo(aux->dato);
       delete aux;
       return newStart;
@@ -161,21 +172,21 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
     else
     {
-      TCadena aux = cadd;
-      while (natInfo(cadd->dato) != natural)
+      TCadena aux = cad;
+      while (natInfo(cad->dato) != natural)
       {
         // guardo posicion actual por si la siguiente encuentra
-        aux = cadd;
-        cadd = cadd->sig;
+        aux = cad;
+        cad = cad->sig;
       }
 
       // q apunta a cad
-      TCadena q = cadd;
+      TCadena q = cad;
 
       // asigno aux al primero de cad si el elemento a remover es el ultimo
-      if (q->sig == cadd->final)
+      if (q == cad->final)
       {
-        aux->sig = cadd->inicio;
+        aux->sig = cad->inicio;
       }
 
       // asigno aux al siguiente elemento
@@ -204,4 +215,15 @@ void imprimirCadena(TCadena cad)
     cad = cad->sig;
   }
   printf("\n");
+}
+
+TCadena insertarAlFinal_aux(nat natural, double real, TCadena cad) {
+
+    TInfo infoEntrante = crearInfo(natural, real);
+    TCadena auxFin = finalCadena(cad);
+    TCadena auxInicio = inicioCadena(cad);
+    
+
+      
+
 }
