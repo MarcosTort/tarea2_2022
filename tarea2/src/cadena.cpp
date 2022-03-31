@@ -43,13 +43,13 @@ TInfo primeroEnCadena(TCadena cad)
 {
   return cad->inicio->dato;
 };
-TCadena inicioCadena(TCadena cad){
-  return cad->inicio;
-}
+// TCadena inicioCadena(TCadena cad){
+//   return cad->inicio;
+// }
 
-TCadena finalCadena(TCadena cad){
-  return cad->final;
-}
+// TCadena finalCadena(TCadena cad){
+//   return cad->final;
+// }
 TCadena cadenaSiguiente(TCadena cad)
 {
   if(cad == NULL || cad->inicio == cad->final){

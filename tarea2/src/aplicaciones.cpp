@@ -3,29 +3,53 @@
 #include "../include/aplicaciones.h"
 #include "../include/cadena.h"
 #include "../include/iterador.h"
-#include "cadena.cpp"
 
-TCadena insertarAlFinal(nat natural, double real, TCadena cad) {
+TCadena insertarAlFinal(nat natural, double real, TCadena cad)
+{
 
-    cad = insertarAlInicio(natural, real, cad);
-    cad = cadenaSiguiente(cad);
-    return cad;
-
+  cad = insertarAlInicio(natural, real, cad);
+  cad = cadenaSiguiente(cad);
+  return cad;
 }
 
-TCadena removerPrimero(TCadena cad) {
+TCadena removerPrimero(TCadena cad)
+{
 
   cad = removerDeCadena(natInfo(primeroEnCadena(cad)), cad);
   return cad;
+}
+
+TCadena copiaCadena(TCadena cad)
+{
+  TCadena copia = crearCadena();
+  TCadena partida = cad;
+  TInfo info = primeroEnCadena(partida);
+  copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
+  cad = cadenaSiguiente(cad);
+
+  while (cad != partida)
+  {
+    TInfo info = primeroEnCadena(partida);
+    copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
+    cad = cadenaSiguiente(cad);
   }
-
-
-TCadena copiaCadena(TCadena cad) {
-  return NULL;
+  return copia;
 }
 
-TIterador reversoDeIterador(TIterador iter) {
-  return NULL;
+TIterador reversoDeIterador(TIterador iter)
+{
+  TIterador reverso = crearIterador();
+
+  reiniciarIterador(iter);
+  reiniciarIterador(reverso);
+
+  while (estaDefinidaActual(iter))
+  {
+    nat entrante = actualEnIterador(iter);
+    agregarAIterador(entrante, reverso);
+  }
+  reiniciarIterador(iter);
+  reiniciarIterador(reverso);
+
+  return reverso;
 }
-
-
