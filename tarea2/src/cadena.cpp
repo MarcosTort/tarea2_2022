@@ -21,6 +21,7 @@ TCadena crearCadena()
 {
   TCadena res = new _rep_cadena;
   res->inicio = res->final = NULL;
+  res->dato=NULL;
   res = res->inicio;
   return res;
 }
