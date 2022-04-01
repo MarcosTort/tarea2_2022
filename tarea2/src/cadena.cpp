@@ -122,6 +122,7 @@ TCadena insertarAlInicio(nat natural, double real, TCadena cad)
   TInfo dato = crearInfo(natural, real);
   q->dato = dato;
   q->sig = cad;
+  cad = cad->inicio;
   if (cad == NULL)
   {
     cad->final = q;
@@ -206,6 +207,7 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
 void imprimirCadena(TCadena cad)
 {
+  if(cad->inicio != NULL){
   char *dat = infoATexto(cad->dato);
   printf("%s", dat);
   delete[] dat;
@@ -216,6 +218,6 @@ void imprimirCadena(TCadena cad)
     printf("%s", dat);
     delete[] dat;
     cad = cad->sig;
-  }
+  }}
   printf("\n");
 }
