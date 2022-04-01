@@ -61,6 +61,7 @@ TCadena cadenaSiguiente(TCadena cad)
     TCadena resultado = cad->sig;
     resultado->inicio = inicio;
     resultado->final = fin;
+    return resultado;
   }
 };
 
