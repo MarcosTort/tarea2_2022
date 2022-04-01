@@ -46,10 +46,14 @@ libera la memoria asignada a 'cad', 'colCads' e 'iter' y los vuelve a crear.
 
 // programa principal
 int main() {
+  printf("%s","inicio");
 
   TIterador iter = crearIterador();
+  printf("%s","iterador");
   TColCadenas colCads = crearColCadenas();
+  printf("%s","colCadenas");
   TCadena cad = crearCadena();
+  printf("%s","cadena");
 
   char restoLinea[MAX_LINEA + 1];
   char nom_comando[MAX_PALABRA];
