@@ -21,7 +21,8 @@ TCadena crearCadena()
 {
   TCadena res = new _rep_cadena;
   res->inicio = res->final = NULL;
-  return NULL;
+  res = res->inicio;
+  return res;
 }
 
 void liberarCadena(TCadena cad)
