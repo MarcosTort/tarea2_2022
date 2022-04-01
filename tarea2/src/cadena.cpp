@@ -121,8 +121,9 @@ TCadena insertarAlInicio(nat natural, double real, TCadena cad)
   TCadena q = new _rep_cadena;
   TInfo dato = crearInfo(natural, real);
   q->dato = dato;
-  q->sig = cad;
   cad = cad->inicio;
+  q->sig = cad;
+  
   if (cad == NULL)
   {
     cad->final = q;
