@@ -67,6 +67,7 @@ TCadena cadenaSiguiente(TCadena cad)
 
 nat cantidadEnCadena(TCadena cad)
 {
+  cad = cad->inicio;
   nat count = 0;
   if (cad == NULL)
   {
