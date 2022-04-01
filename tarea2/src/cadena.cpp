@@ -87,6 +87,7 @@ nat cantidadEnCadena(TCadena cad)
 
 bool estaEnCadena(nat natural, TCadena cad)
 {
+  cad = cad->inicio;
   if (cad == NULL)
   {
     return false;
