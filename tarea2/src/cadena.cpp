@@ -21,7 +21,7 @@ TCadena crearCadena()
 {
   TCadena res = new _rep_cadena;
   res->inicio = res->final = NULL;
-  return res;
+  return res->inicio;
 }
 
 void liberarCadena(TCadena cad)
@@ -118,6 +118,7 @@ bool estaEnCadena(nat natural, TCadena cad)
 
 TCadena insertarAlInicio(nat natural, double real, TCadena cad)
 {
+  printf("%s", "Inicio");
   TCadena q = new _rep_cadena;
   printf("%s", "121");
   TInfo dato = crearInfo(natural, real);
