@@ -136,8 +136,11 @@ int main() {
              (estaEnCadena(natural, cad)) ? "está" : "no está");
 
     } else if (0 == strcmp(nom_comando, "insertarAlInicio")) {
+
       nat natural = leerNat();
+      printf("%s", "leerNat");
       double real = leerDouble();
+      printf("%s", "leerDouble");
       cad = insertarAlInicio(natural, real, cad);
       printf("Se insertó (%d,%4.2lf) al inicio de la cadena.\n", natural, real);
       
