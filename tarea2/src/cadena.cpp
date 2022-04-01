@@ -216,14 +216,3 @@ void imprimirCadena(TCadena cad)
   }
   printf("\n");
 }
-
-TCadena insertarAlFinal_aux(nat natural, double real, TCadena cad) {
-
-    TInfo infoEntrante = crearInfo(natural, real);
-    TCadena auxFin = finalCadena(cad);
-    TCadena auxInicio = inicioCadena(cad);
-    
-
-      
-
-}
