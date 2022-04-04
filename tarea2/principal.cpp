@@ -36,6 +36,7 @@ libera la memoria asignada a 'cad', 'colCads' e 'iter' y los vuelve a crear.
 #include "include/colCadenas.h"
 #include "include/info.h"
 #include "include/utils.h"
+
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -129,13 +130,7 @@ int main() {
     } else if (0 == strcmp(nom_comando, "cantidadEnCadena")) {
       printf("La cantidad es %u.\n", cantidadEnCadena(cad));
 
-    } else if (0 == strcmp(nom_comando, "inicioCad" )){
-      printf("%s",infoATexto(inicioCad(cad)));
-    }
-    else if (0 == strcmp(nom_comando, "finalCad" )){
-      printf("%s", infoATexto(finalCad(cad)));
-    }
-     else if (0 == strcmp(nom_comando, "estaEnCadena")) {
+    } else if (0 == strcmp(nom_comando, "estaEnCadena")) {
       nat natural = leerNat();
       printf("%u %s en la cadena.\n", natural,
              (estaEnCadena(natural, cad)) ? "está" : "no está");
@@ -228,11 +223,9 @@ int main() {
       cad = crearCadena();
       liberarColCadenas(colCads);
       colCads = crearColCadenas();
-      printf("Estructuras reiniciadas.\n");}
-      else if(0 == strcmp(nom_comando, "liberarCadena")){
-        liberarCadena(cad);
-      }
-     else {
+      printf("Estructuras reiniciadas.\n");
+      
+    } else {
       printf("Comando no reconocido.\n");
     } // if
     fgets(restoLinea, MAX_LINEA + 1, stdin);

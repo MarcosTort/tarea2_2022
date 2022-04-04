@@ -71,13 +71,13 @@ TInfo primeroEnCadena(TCadena cad)
 
 TCadena cadenaSiguiente(TCadena cad)
 {
-  if (cad == NULL || cad->inicio == cad->final)
+  if (cad->inicio == NULL || cad->inicio == cad->final)
   {
     return cad;
   }
   else
   {
-    nodoCadena *fin = cad->final->sig;
+    nodoCadena *fin = cad->inicio;
     nodoCadena *inicio = cad->inicio->sig;
     TCadena resultado = cad;
     resultado->inicio = inicio;
