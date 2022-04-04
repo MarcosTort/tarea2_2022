@@ -40,8 +40,6 @@ void liberarCadena(TCadena cad)
     nodoCadena *lugar = cad->inicio;
     while (lugar != NULL && lugar != cad->inicio)
     {
-
-      printf("%d", __LINE__);
       nodoCadena *prox_a_borrar = lugar;
       lugar = lugar->sig;
       if (lugar->dato != NULL)
@@ -150,7 +148,6 @@ TCadena insertarAlInicio(nat natural, double real, TCadena cad)
   }
   else
   {
-
     in->sig = cad->inicio;
   }
   cad->inicio = in;
