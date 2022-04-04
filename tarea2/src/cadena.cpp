@@ -51,6 +51,7 @@ void liberarCadena(TCadena cad)
       delete (prox_a_borrar);
     }
   }
+  cad->final = cad->inicio = NULL;
   delete cad;
 }
 
