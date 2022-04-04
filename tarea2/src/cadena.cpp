@@ -36,10 +36,10 @@ void liberarCadena(TCadena cad)
     nodoCadena *lugar = cad->inicio;
     while (lugar != NULL)
     {
-      nodoCadena *prox_a_borrar = cad->inicio;
+      nodoCadena *prox_a_borrar = lugar;
       liberarInfo(prox_a_borrar->dato);
-      delete (prox_a_borrar);
       lugar = lugar->sig;
+      delete (prox_a_borrar);
     }
   }
   delete cad;
