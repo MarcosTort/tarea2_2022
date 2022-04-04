@@ -12,16 +12,14 @@
 
 struct _rep_cadena
 {
-  TCadena inicio;
-  TCadena final;
   TCadena sig;
   TInfo dato;
+  TCadena final;
 };
 
 TCadena crearCadena()
 {
   TCadena res = new _rep_cadena;
-  res->inicio = res->final = NULL;
   return res;
 }
 
@@ -31,16 +29,17 @@ void liberarCadena(TCadena cad)
   {
     return;
   }
-  if (cad->inicio != NULL)
+  if (cad != NULL)
   {
+    TCadena inicio = cad;
     bool flag = true;
-    TCadena lugar = cad->inicio;
-    while (lugar != NULL && flag )
+    TCadena lugar = inicio;
+    while (lugar != NULL && flag)
     {
-      
+
       TCadena prox_a_borrar = lugar;
       lugar = lugar->sig;
-      flag = lugar != cad->inicio;
+      flag = lugar != inicio;
       if (prox_a_borrar->dato != NULL)
       {
         liberarInfo(prox_a_borrar->dato);
@@ -48,34 +47,32 @@ void liberarCadena(TCadena cad)
       delete (prox_a_borrar);
     }
   }
-  cad->final = cad->inicio = NULL;
   delete cad;
 }
 
-TInfo inicioCad(TCadena cad)
-{
-  return cad->inicio->dato;
-}
-TInfo finalCad(TCadena cad)
-{
-  return cad->final->dato;
-}
+// TInfo inicioCad(TCadena cad)
+// {
+//   return cad->dato;
+// }
+// TInfo finalCad(TCadena cad)
+// {
+//   return cad->final->dato;
+// }
 
 TInfo primeroEnCadena(TCadena cad)
 {
-  return cad->inicio->dato;
+  return cad->dato;
 };
 
 TCadena cadenaSiguiente(TCadena cad)
 {
-  if (cad->inicio == NULL || cad->inicio == cad->final)
+  if (cad == NULL || cad->sig == cad)
   {
     return cad;
   }
   else
   {
-    
-    return cad->inicio->sig;
+    return cad->sig;
   }
 };
 
@@ -83,13 +80,14 @@ nat cantidadEnCadena(TCadena cad)
 {
 
   nat count = 0;
-  if (cad->inicio != NULL)
+  if (cad != NULL)
   {
-    TCadena rec = cad->inicio->sig;
+    TCadena inicio = cad;
+    TCadena rec = inicio->sig;
 
     count = 1;
 
-    while (rec != cad->inicio)
+    while (rec != inicio)
     {
       count++;
 
@@ -102,16 +100,17 @@ nat cantidadEnCadena(TCadena cad)
 
 bool estaEnCadena(nat natural, TCadena cad)
 {
-  if (cad->inicio == NULL)
+  if (cad == NULL)
   {
     return false;
   }
   else
   {
-    TCadena rec = cad->inicio;
+    TCadena inicio = cad;
+    TCadena rec = inicio;
     while ((rec != NULL) && (natInfo(rec->dato) != natural))
     {
-      if (rec->sig != cad->inicio)
+      if (rec->sig != inicio)
       {
         rec = rec->sig;
       }
@@ -133,20 +132,19 @@ bool estaEnCadena(nat natural, TCadena cad)
 
 TCadena insertarAlInicio(nat natural, double real, TCadena cad)
 {
+  TCadena inicio = cad;
   TCadena in = new _rep_cadena;
   TInfo dato = crearInfo(natural, real);
   in->dato = dato;
-  if (cad->inicio == NULL)
+  if (cad == NULL)
   {
     in->sig = in;
-    cad->final = in;
   }
   else
   {
-    in->sig = cad->inicio;
+    in->sig = inicio;
   }
-  cad->inicio = in;
-  cad->final->sig = in;
+  cad = in;
   return cad;
 }
 
