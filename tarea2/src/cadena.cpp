@@ -43,11 +43,11 @@ void liberarCadena(TCadena cad)
 
       printf("%d", __LINE__);
       nodoCadena *prox_a_borrar = lugar;
+      lugar = lugar->sig;
       if (lugar->dato != NULL)
       {
         liberarInfo(prox_a_borrar->dato);
       }
-      lugar = lugar->sig;
       delete (prox_a_borrar);
     }
   }
