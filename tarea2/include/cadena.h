@@ -115,5 +115,6 @@ TCadena removerDeCadena(nat natural, TCadena cad);
   Si cantidadEnCadena(cad) es 0 sólo se imprime el fin de línea.
  */
 void imprimirCadena(TCadena cad);
-
+TInfo finalCad(TCadena cad);
+TInfo inicioCad(TCadena cad);
 #endif

@@ -36,7 +36,6 @@ libera la memoria asignada a 'cad', 'colCads' e 'iter' y los vuelve a crear.
 #include "include/colCadenas.h"
 #include "include/info.h"
 #include "include/utils.h"
-
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -46,14 +45,10 @@ libera la memoria asignada a 'cad', 'colCads' e 'iter' y los vuelve a crear.
 
 // programa principal
 int main() {
-  printf("%s","inicio");
 
   TIterador iter = crearIterador();
-  printf("%s","iterador");
   TColCadenas colCads = crearColCadenas();
-  printf("%s","colCadenas");
   TCadena cad = crearCadena();
-  printf("%s","cadena");
 
   char restoLinea[MAX_LINEA + 1];
   char nom_comando[MAX_PALABRA];
@@ -134,17 +129,20 @@ int main() {
     } else if (0 == strcmp(nom_comando, "cantidadEnCadena")) {
       printf("La cantidad es %u.\n", cantidadEnCadena(cad));
 
-    } else if (0 == strcmp(nom_comando, "estaEnCadena")) {
+    } else if (0 == strcmp(nom_comando, "inicioCad" )){
+      printf("%s",infoATexto(inicioCad(cad)));
+    }
+    else if (0 == strcmp(nom_comando, "finalCad" )){
+      printf("%s", infoATexto(finalCad(cad)));
+    }
+     else if (0 == strcmp(nom_comando, "estaEnCadena")) {
       nat natural = leerNat();
       printf("%u %s en la cadena.\n", natural,
              (estaEnCadena(natural, cad)) ? "está" : "no está");
 
     } else if (0 == strcmp(nom_comando, "insertarAlInicio")) {
-
       nat natural = leerNat();
-      printf("%s", "leerNat");
       double real = leerDouble();
-      printf("%s", "leerDouble");
       cad = insertarAlInicio(natural, real, cad);
       printf("Se insertó (%d,%4.2lf) al inicio de la cadena.\n", natural, real);
       

@@ -9,31 +9,34 @@
 #include <stdlib.h>
 
 // los elementos se mantienen entre 0 y cantidad - 1, incluidos
+struct nodoCadena
+{
+  TInfo dato;
+  nodoCadena *sig;
+};
 
 struct _rep_cadena
 {
-  TInfo dato;
-  _rep_cadena *sig;
-  _rep_cadena *inicio, *final;
+  nodoCadena *inicio;
+  nodoCadena *final;
 };
 
 TCadena crearCadena()
 {
   TCadena res = new _rep_cadena;
   res->inicio = res->final = NULL;
-  res->dato=NULL;
-  res = res->inicio;
   return res;
 }
 
 void liberarCadena(TCadena cad)
 {
 
-  if (cad != NULL)
+  if (cad->inicio != NULL)
   {
-    while (cad->sig != NULL)
+    nodoCadena *lugar = cad->inicio;
+    while (lugar!= cad->inicio)
     {
-      TCadena prox_a_borrar = cad->inicio;
+      nodoCadena *prox_a_borrar = cad->inicio;
       cad->inicio = cad->inicio->sig;
       liberarInfo(prox_a_borrar->dato);
       delete (prox_a_borrar);
@@ -41,26 +44,31 @@ void liberarCadena(TCadena cad)
   }
 }
 
+TInfo inicioCad(TCadena cad)
+{
+  return cad->inicio->dato;
+}
+TInfo finalCad(TCadena cad)
+{
+  return cad->final->dato;
+}
+
 TInfo primeroEnCadena(TCadena cad)
 {
   return cad->inicio->dato;
 };
-// TCadena inicioCadena(TCadena cad){
-//   return cad->inicio;
-// }
 
-// TCadena finalCadena(TCadena cad){
-//   return cad->final;
-// }
 TCadena cadenaSiguiente(TCadena cad)
 {
-  if(cad == NULL || cad->inicio == cad->final){
+  if (cad == NULL || cad->inicio == cad->final)
+  {
     return cad;
   }
-  else{
-    TCadena fin = cad->final->sig;
-    TCadena inicio = cad->inicio->sig;
-    TCadena resultado = cad->sig;
+  else
+  {
+    nodoCadena *fin = cad->final->sig;
+    nodoCadena *inicio = cad->inicio->sig;
+    TCadena resultado = cad;
     resultado->inicio = inicio;
     resultado->final = fin;
     return resultado;
@@ -69,45 +77,46 @@ TCadena cadenaSiguiente(TCadena cad)
 
 nat cantidadEnCadena(TCadena cad)
 {
-  cad = cad->inicio;
+
   nat count = 0;
-  if (cad == NULL)
+  if (cad->inicio != NULL)
   {
-    return count;
-  }
-  else
-  {
+    nodoCadena *rec = cad->inicio->sig;
+
     count = 1;
-    while (cad->sig != cad->inicio)
+
+    while (rec != cad->inicio)
     {
       count++;
-      cad = cad->sig;
+
+      rec = rec->sig;
     }
   }
+
   return count;
 }
 
 bool estaEnCadena(nat natural, TCadena cad)
 {
-  cad = cad->inicio;
-  if (cad == NULL)
+  if (cad->inicio == NULL)
   {
     return false;
   }
   else
   {
-    while ((cad != NULL) && (natInfo(cad->dato) != natural))
+    nodoCadena *rec = cad->inicio;
+    while ((rec != NULL) && (natInfo(rec->dato) != natural))
     {
-      if (cad->sig != cad->inicio)
+      if (rec->sig != cad->inicio)
       {
-        cad = cad->sig;
+        rec = rec->sig;
       }
       else
       {
         break;
       }
     }
-    if (natInfo(cad->dato) == natural)
+    if (natInfo(rec->dato) == natural)
     {
       return true;
     }
@@ -120,40 +129,34 @@ bool estaEnCadena(nat natural, TCadena cad)
 
 TCadena insertarAlInicio(nat natural, double real, TCadena cad)
 {
-  printf("%s", "Inicio");
-  TCadena q = crearCadena();
-  printf("%s", "121");
+  nodoCadena *in = new nodoCadena;
   TInfo dato = crearInfo(natural, real);
-  printf("%s", "123");
-  q->dato = dato;
-  printf("%s","125");
-  cad = cad->inicio;
-  printf("%s", "127");
-  q->sig = cad;
-  printf("%s","129");
-  
-  if (cad == NULL)
+  in->dato = dato;
+  if (cad->inicio == NULL)
   {
-    printf("%s","entra a if");
-    cad->final = q;
-    printf("%s","135");
+    in->sig = in;
+    cad->final = in;
   }
-  cad = q;
-  printf("%s","138");
-  cad->inicio = q;
-  printf("%s","140");
+  else
+  {
+
+    in->sig = cad->inicio;
+  }
+  cad->inicio = in;
+  cad->final->sig = cad->inicio;
   return cad;
 }
 
 TInfo infoCadena(nat natural, TCadena cad)
 {
-  ////////printf("info cadena");
-  while (natInfo(cad->dato) != natural)
+
+  nodoCadena *rec = cad->inicio;
+  while (natInfo(rec->dato) != natural)
   {
-    cad = cad->sig;
+    rec = rec->sig;
   }
 
-  return cad->dato;
+  return rec->dato;
 }
 /*
   Remueve el primer elemento de 'cad' cuyo componente natural es 'natural'.
@@ -164,55 +167,55 @@ TInfo infoCadena(nat natural, TCadena cad)
 TCadena removerDeCadena(nat natural, TCadena cad)
 
 {
+  nodoCadena *rec = cad->inicio;
   // si tiene solo un elemento, borro info y cad
-  if (cad->sig == cad->inicio)
+  if (rec->sig == rec)
   {
-    liberarInfo(cad->dato);
-    delete cad;
-    return NULL;
+    liberarInfo(rec->dato);
+    delete rec;
+    cad->final = cad->inicio = NULL;
+    return cad;
   }
   else
   // si tiene mas de un elemento, busco
   {
-
     // pregunto si el buscado está en el inicio
     if (natInfo(cad->inicio->dato) == natural)
     {
-      TCadena newStart = cad->sig;
+      nodoCadena *aBorrar = cad->inicio;
+      nodoCadena *newStart = cad->inicio->sig;
       cad->inicio = newStart;
       cad->final->sig = newStart;
-      TCadena aux = cad;
-      liberarInfo(aux->dato);
-      delete aux;
-      return newStart;
+      liberarInfo(aBorrar->dato);
+      delete aBorrar;
+      return cad;
     }
 
     else
     {
-      TCadena aux = cad;
-      while (natInfo(cad->dato) != natural)
+      nodoCadena *rec = cad->inicio;
+      nodoCadena *anteriorABorrar;
+      while (natInfo(rec->dato) != natural)
       {
         // guardo posicion actual por si la siguiente encuentra
-        aux = cad;
-        cad = cad->sig;
+        anteriorABorrar = rec;
+        rec = rec->sig;
       }
 
-      // q apunta a cad
-      TCadena q = cad;
-
       // asigno aux al primero de cad si el elemento a remover es el ultimo
-      if (q == cad->final)
+      if (rec == cad->final)
       {
-        aux->sig = cad->inicio;
+        cad->final = anteriorABorrar;
+        anteriorABorrar->sig = cad->inicio;
       }
 
       // asigno aux al siguiente elemento
       else
       {
-        aux->sig = q->sig;
+        anteriorABorrar->sig = rec->sig;
       }
-      liberarInfo(q->dato);
-      delete q;
+      liberarInfo(rec->dato);
+      delete rec;
       return cad;
     }
   }
@@ -220,17 +223,20 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
 void imprimirCadena(TCadena cad)
 {
-  if(cad->inicio != NULL){
-  char *dat = infoATexto(cad->dato);
-  printf("%s", dat);
-  delete[] dat;
-  cad = cad->sig;
-  while (cad != cad->inicio)
+  nodoCadena *rec = cad->inicio;
+  if (rec != NULL)
   {
-    char *dat = infoATexto(cad->dato);
+    char *dat = infoATexto(rec->dato);
     printf("%s", dat);
     delete[] dat;
-    cad = cad->sig;
-  }}
+    rec = rec->sig;
+    while (rec != cad->inicio)
+    {
+      char *dat = infoATexto(rec->dato);
+      printf("%s", dat);
+      delete[] dat;
+      rec = rec->sig;
+    }
+  }
   printf("\n");
 }

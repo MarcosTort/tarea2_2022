@@ -22,9 +22,11 @@ void liberarColCadenas(TColCadenas col){
 
   for (int i = 0; i < CANT_CADS; i++)
   {
+      
       liberarCadena(col->arr[i]);
   }
-  delete [] col;
+  delete[] col->arr;
+  delete col;
 
 };
 
