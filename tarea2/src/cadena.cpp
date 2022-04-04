@@ -9,16 +9,13 @@
 #include <stdlib.h>
 
 // los elementos se mantienen entre 0 y cantidad - 1, incluidos
-struct nodoCadena
-{
-  TInfo dato;
-  nodoCadena *sig;
-};
 
 struct _rep_cadena
 {
-  nodoCadena *inicio;
-  nodoCadena *final;
+  TCadena inicio;
+  TCadena final;
+  TCadena sig;
+  TInfo dato;
 };
 
 TCadena crearCadena()
@@ -37,11 +34,11 @@ void liberarCadena(TCadena cad)
   if (cad->inicio != NULL)
   {
     bool flag = true;
-    nodoCadena *lugar = cad->inicio;
+    TCadena lugar = cad->inicio;
     while (lugar != NULL && flag )
     {
       
-      nodoCadena *prox_a_borrar = lugar;
+      TCadena prox_a_borrar = lugar;
       lugar = lugar->sig;
       flag = lugar != cad->inicio;
       if (prox_a_borrar->dato != NULL)
@@ -77,12 +74,8 @@ TCadena cadenaSiguiente(TCadena cad)
   }
   else
   {
-    nodoCadena *fin = cad->inicio;
-    nodoCadena *inicio = cad->inicio->sig;
-    TCadena resultado = cad;
-    resultado->inicio = inicio;
-    resultado->final = fin;
-    return resultado;
+    
+    return cad->inicio->sig;
   }
 };
 
@@ -92,7 +85,7 @@ nat cantidadEnCadena(TCadena cad)
   nat count = 0;
   if (cad->inicio != NULL)
   {
-    nodoCadena *rec = cad->inicio->sig;
+    TCadena rec = cad->inicio->sig;
 
     count = 1;
 
@@ -115,7 +108,7 @@ bool estaEnCadena(nat natural, TCadena cad)
   }
   else
   {
-    nodoCadena *rec = cad->inicio;
+    TCadena rec = cad->inicio;
     while ((rec != NULL) && (natInfo(rec->dato) != natural))
     {
       if (rec->sig != cad->inicio)
@@ -140,7 +133,7 @@ bool estaEnCadena(nat natural, TCadena cad)
 
 TCadena insertarAlInicio(nat natural, double real, TCadena cad)
 {
-  nodoCadena *in = new nodoCadena;
+  TCadena in = new _rep_cadena;
   TInfo dato = crearInfo(natural, real);
   in->dato = dato;
   if (cad->inicio == NULL)
@@ -160,7 +153,7 @@ TCadena insertarAlInicio(nat natural, double real, TCadena cad)
 TInfo infoCadena(nat natural, TCadena cad)
 {
 
-  nodoCadena *rec = cad->inicio;
+  TCadena rec = cad->inicio;
   while (natInfo(rec->dato) != natural)
   {
     rec = rec->sig;
@@ -177,7 +170,7 @@ TInfo infoCadena(nat natural, TCadena cad)
 TCadena removerDeCadena(nat natural, TCadena cad)
 
 {
-  nodoCadena *rec = cad->inicio;
+  TCadena rec = cad->inicio;
   // si tiene solo un elemento, borro info y cad
   if (rec->sig == rec)
   {
@@ -192,8 +185,8 @@ TCadena removerDeCadena(nat natural, TCadena cad)
     // pregunto si el buscado está en el inicio
     if (natInfo(cad->inicio->dato) == natural)
     {
-      nodoCadena *aBorrar = cad->inicio;
-      nodoCadena *newStart = cad->inicio->sig;
+      TCadena aBorrar = cad->inicio;
+      TCadena newStart = cad->inicio->sig;
       cad->inicio = newStart;
       cad->final->sig = newStart;
       liberarInfo(aBorrar->dato);
@@ -203,8 +196,8 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
     else
     {
-      nodoCadena *rec = cad->inicio;
-      nodoCadena *anteriorABorrar;
+      TCadena rec = cad->inicio;
+      TCadena anteriorABorrar;
       while (natInfo(rec->dato) != natural)
       {
         // guardo posicion actual por si la siguiente encuentra
@@ -233,7 +226,7 @@ TCadena removerDeCadena(nat natural, TCadena cad)
 
 void imprimirCadena(TCadena cad)
 {
-  nodoCadena *rec = cad->inicio;
+  TCadena rec = cad->inicio;
   if (rec != NULL)
   {
     char *dat = infoATexto(rec->dato);
