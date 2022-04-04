@@ -228,9 +228,11 @@ int main() {
       cad = crearCadena();
       liberarColCadenas(colCads);
       colCads = crearColCadenas();
-      printf("Estructuras reiniciadas.\n");
-      
-    } else {
+      printf("Estructuras reiniciadas.\n");}
+      else if(0 == strcmp(nom_comando, "liberarCadena")){
+        liberarCadena(cad);
+      }
+     else {
       printf("Comando no reconocido.\n");
     } // if
     fgets(restoLinea, MAX_LINEA + 1, stdin);

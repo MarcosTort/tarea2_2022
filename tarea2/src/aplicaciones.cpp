@@ -4,6 +4,7 @@
 #include "../include/cadena.h"
 #include "../include/iterador.h"
 
+
 TCadena insertarAlFinal(nat natural, double real, TCadena cad)
 {
 
@@ -36,19 +37,31 @@ TCadena copiaCadena(TCadena cad)
   return copia;
 }
 
+
+
+
 TIterador reversoDeIterador(TIterador iter)
 {
   TIterador reverso = crearIterador();
 
   reiniciarIterador(iter);
   reiniciarIterador(reverso);
-
+  TCadena aux = crearCadena();
+  int count= 0;
   while (estaDefinidaActual(iter))
   {
     nat entrante = actualEnIterador(iter);
-    agregarAIterador(entrante, reverso);
+    aux = insertarAlInicio(entrante,0, aux);
+    avanzarIterador(iter);
+    count ++;
   }
-  reiniciarIterador(iter);
+
+  for (int i = 0; i < count; i++)
+  {
+    agregarAIterador(natInfo(primeroEnCadena(aux)), reverso);
+    aux = cadenaSiguiente(aux);
+  }
+  
   reiniciarIterador(reverso);
 
   return reverso;
