@@ -34,7 +34,7 @@ void liberarCadena(TCadena cad)
   if (cad->inicio != NULL)
   {
     nodoCadena *lugar = cad->inicio;
-    while (lugar!= NULL)
+    while (lugar != NULL)
     {
       nodoCadena *prox_a_borrar = cad->inicio;
       liberarInfo(prox_a_borrar->dato);
@@ -42,6 +42,7 @@ void liberarCadena(TCadena cad)
       lugar = lugar->sig;
     }
   }
+  delete cad;
 }
 
 TInfo inicioCad(TCadena cad)
