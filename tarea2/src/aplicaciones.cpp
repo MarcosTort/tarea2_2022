@@ -22,9 +22,10 @@ TCadena removerPrimero(TCadena cad)
 
 TCadena copiaCadena(TCadena cad)
 {
+  if(cad != NULL){
   TCadena copia = crearCadena();
   TCadena partida = cad;
-  TInfo info = primeroEnCadena(partida);
+  TInfo info = primeroEnCadena(cad);
   copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
   cad = cadenaSiguiente(cad);
 
@@ -33,8 +34,9 @@ TCadena copiaCadena(TCadena cad)
     TInfo info = primeroEnCadena(partida);
     copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
     cad = cadenaSiguiente(cad);
-  }
   return copia;
+  }}
+  else return NULL;
 }
 
 
