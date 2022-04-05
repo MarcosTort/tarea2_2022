@@ -1,8 +1,0 @@
-1,5c1
-< 1>#  implementar agregarAIterador.
-< 2>Actual de it NO está definida.
-< 3>Agregando 5 a it.
-< 4>Actual de it NO está definida.
-< 5>Fin.
----
-> timeout: failed to run command ‘valgrind’: No such file or directory
