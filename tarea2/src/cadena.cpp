@@ -32,15 +32,15 @@ void liberarCadena(TCadena cad)
 
   TCadena prox_a_borrar = cad;
   TCadena final = cad->ant;
-  while (cad != final->sig)
+  while (cad != final)
   {
     prox_a_borrar = cad;
     cad = cad->sig;
-
     liberarInfo(prox_a_borrar->dato);
     delete (prox_a_borrar);
   }
   delete cad;
+  cad = NULL;
 }
 
 // TInfo inicioCad(TCadena cad)
