@@ -29,19 +29,18 @@ void liberarCadena(TCadena cad)
   {
     return;
   }
-  if (cad != NULL)
+
+  TCadena prox_a_borrar = cad;
+  TCadena final = cad->ant;
+  while (cad != final->sig)
   {
-    TCadena prox_a_borrar = cad;
-    TCadena final = cad->ant;
-    while (cad != final)
-    {
-      prox_a_borrar = cad;
-      cad = cad->sig;
-      liberarInfo(prox_a_borrar->dato);
-      delete (prox_a_borrar);
-    }
-    delete cad;
+    prox_a_borrar = cad;
+    cad = cad->sig;
+
+    liberarInfo(prox_a_borrar->dato);
+    delete (prox_a_borrar);
   }
+  delete cad;
 }
 
 // TInfo inicioCad(TCadena cad)
