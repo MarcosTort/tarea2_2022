@@ -19,11 +19,7 @@ struct _rep_cadena
 
 TCadena crearCadena()
 {
-  TCadena res = new _rep_cadena;
-  res->ant = res->sig = NULL;
-  res->dato = NULL;
-  res = NULL;
-  return res;
+  return NULL;
 }
 
 void liberarCadena(TCadena cad)
