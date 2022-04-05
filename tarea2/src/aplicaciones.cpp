@@ -63,7 +63,7 @@ TIterador reversoDeIterador(TIterador iter)
     agregarAIterador(natInfo(primeroEnCadena(aux)), reverso);
     aux = cadenaSiguiente(aux);
   }
-
+  liberarCadena(aux);
   reiniciarIterador(reverso);
 
   return reverso;
