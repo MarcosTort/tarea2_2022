@@ -19,6 +19,7 @@ struct _rep_cadena
 
 TCadena crearCadena()
 {
+
   return NULL;
 }
 
@@ -37,7 +38,6 @@ void liberarCadena(TCadena cad)
       if (cad->sig != NULL)
       {
         cad = cad->sig;
-        return;
       }
 
       if (prox_a_borrar->dato != NULL)
