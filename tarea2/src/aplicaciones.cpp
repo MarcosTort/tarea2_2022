@@ -32,7 +32,7 @@ TCadena copiaCadena(TCadena cad)
 
     while (siguiente != partida)
     {
-      TInfo info = primeroEnCadena(partida);
+      TInfo info = primeroEnCadena(siguiente);
       copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
       siguiente = cadenaSiguiente(siguiente);
     }
