@@ -180,13 +180,11 @@ TCadena removerDeCadena(nat natural, TCadena cad)
   else
   // si tiene mas de un elemento, busco
   {
-    printf("%d", __LINE__);
 
     bool primero = true;
     TCadena anteriorABorrar = rec->ant;
     while (natInfo(rec->dato) != natural)
     {
-      printf("%d", __LINE__);
       anteriorABorrar = rec;
       rec = rec->sig;
       primero = false;
@@ -198,11 +196,9 @@ TCadena removerDeCadena(nat natural, TCadena cad)
     delete rec;
     if (primero)
     {
-      printf("%d", __LINE__);
 
       cad = anteriorABorrar->sig;
     }
-    printf("%s", infoATexto(anteriorABorrar->dato));
     return cad;
   }
 }
