@@ -39,6 +39,7 @@ void liberarCadena(TCadena cad)
     liberarInfo(prox_a_borrar->dato);
     delete (prox_a_borrar);
   }
+  liberarInfo(cad->dato);
   delete cad;
   cad = NULL;
 }
