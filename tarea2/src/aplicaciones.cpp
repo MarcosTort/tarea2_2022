@@ -25,15 +25,16 @@ TCadena copiaCadena(TCadena cad)
   {
     TCadena copia = crearCadena();
     TCadena partida = cad;
+    TCadena siguiente = cad;
     TInfo info = primeroEnCadena(cad);
     copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
-    cad = cadenaSiguiente(cad);
+    siguiente = cadenaSiguiente(siguiente);
 
     while (cad != partida)
     {
       TInfo info = primeroEnCadena(partida);
       copia = insertarAlFinal(natInfo(info), realInfo(info), copia);
-      cad = cadenaSiguiente(cad);
+      siguiente = cadenaSiguiente(siguiente);
     }
       return copia;
   }
